@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+
+.logo_text {
+    @apply text-gray-600 font-medium mb-6 md:text-left;
+}
+
+.form_label {
+    @apply block text-gray-700 font-medium text-sm mb-2;
+}
+
+.form_input {
+    @apply w-80 px-4 py-3 bg-gray-100 rounded-lg outline-none text-gray-800 focus:ring-2 focus:ring-[#25B764];
+
+}
