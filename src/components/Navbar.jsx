@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
-const linkClasses = "relative text-white no-underline hover:text-blue-400 transition-colors duration-300 before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-blue-400 before:transition-all before:duration-300 hover:before:w-full";
+const linkClasses = "relative text-[#25b764] no-underline hover:text-[#28b969] transition-colors duration-300 before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-[#25b764] before:transition-all before:duration-300 hover:before:w-full";
 
 function Navbar() {
   return (
-    <nav className="bg-[#030b1d] flex justify-between items-center p-4">
-      <Link to="/" className="text-[#ff0004] text-4xl font-bold hover:cursor-pointer ">Trac<span className="text-[#25b764]">K</span></Link>
+    <nav className="bg-gray-100 flex justify-between items-baseline p-4 border-b-2 border-b-gray-100">
+      <Link to="/">
+        <Logo />
+      </Link>
       <div style={{ display: "flex", gap: "1rem" }}>
         <Link to="/signin" className={linkClasses}>Sign In</Link>
         <Link to="/signup" className={linkClasses}>Sign Up</Link>
@@ -15,5 +18,6 @@ function Navbar() {
     </nav>
   );
 }
+
 
 export default Navbar;
