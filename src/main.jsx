@@ -1,18 +1,11 @@
 import React, { Suspense, lazy } from "react";
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
-// import App from './App';
-// import SignIn from './pages/SignInForm';
-// import SignUp from './pages/SignUpForm';
-// import Dashboard from './pages/Dashboard';
-
 import RootLayout from "./layouts/RootLayout";
+import PlainLayout from "./layouts/PlainLayout";
 import ErrorPage from "./pages/ErrorPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFoundPage from "./pages/NotFound";
@@ -25,14 +18,13 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"))
 
 const router =createBrowserRouter([
+  //Layout with Navbar and Footer
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> }, // renders at "/"
-      { path: "signin", element: <SignIn /> }, // "/signin"
-      { path: "signup", element: <SignUp /> }, // "/signup"
       { 
         path: "dashboard",
         element: (
@@ -41,9 +33,18 @@ const router =createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: "*", element: <NotFound /> },
     ],
   },
+
+  // Layout without Navbar and Footer
+{
+  element: <PlainLayout />,
+  children: [
+    { path: "signin", element: <SignIn /> }, // "/signin"
+    { path: "signup", element: <SignUp /> }, // "/signup"    
+  ]
+},
+  { path: "*", element: <NotFound /> },
 ]);
 
 
