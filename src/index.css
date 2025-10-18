@@ -2,14 +2,17 @@
 
 
 .logo_text {
-    @apply text-gray-600 font-medium mb-6 md:text-left;
+    @apply text-gray-900 text-xl font-medium mb-6 md:text-left;
 }
 
 .form_label {
-    @apply block text-gray-700 font-medium text-sm mb-2;
+    @apply block text-gray-600 font-medium text-sm mb-2 relative before:content-['*'] before:text-red-500 before:mr-1;
 }
 
 .form_input {
-    @apply w-80 px-4 py-3 bg-gray-100 rounded-lg outline-none text-gray-800 focus:ring-2 focus:ring-[#25B764];
+    @apply w-full h-10 text-sm text-gray-700 font-medium bg-gray-100 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-[#25b764];
+}
 
+.form_input_error {
+    @apply border-red-400 focus:ring-red-400;
 }

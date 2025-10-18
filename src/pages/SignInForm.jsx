@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Logo from "../components/common/Logo";
+import PrimaryButton from "../components/common/PrimaryButton";
 
 export default function SignIn() {
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -12,10 +15,7 @@ export default function SignIn() {
             <div>
                 {/* Logo */}
                 <div className="w-full">
-                    <h1 className="text-4xl font-bold mb-2 md:text-left">
-                        <span className="text-[#FF0004]">Trac</span>
-                        <span className="text-[#25B764]">K</span>
-                    </h1>
+                    <Logo />
                     <p className="text-gray-600 font-medium mb-6 md:text-left">
                         Welcomes you back!   
                     </p>               
@@ -24,21 +24,21 @@ export default function SignIn() {
                 {/* Form */}
                 <form className="w-full max-w-sm space-y-5">
                     {/* Email Input */}
-                    <label className="block text-gray-700 font-medium text-sm mb-2">Email</label>
+                    <label className="form_label">Email</label>
                     <input
                         type="email"
                         placeholder="Email"
-                        className="w-80 px-4 py-3 bg-gray-100 rounded-lg outline-none text-gray-800 focus:ring-2 focus:ring-[#25B764]"
+                        className="form_input"
                         required
                     />
 
                     {/* Password Input */}
-                    <label className="block text-gray-700 font-medium text-sm mb-2">Password</label>
+                    <label className="form_label">Password</label>
                     <div className="relative">
                         <input
                         type="password"
                         placeholder="Password"
-                        className="w-80 px-4 py-3 bg-gray-100 rounded-lg outline-none text-gray-800 focus:ring-2 focus:ring-[#25B764]"
+                        className="form_input"
                         onFocus={() => setPasswordFocused(true)}
                         onBlur={() => setPasswordFocused(false)}
                         onChange={(e) => setPassword(e.target.value)}
@@ -81,21 +81,19 @@ export default function SignIn() {
                     </div>
 
                     {/* Sign In Button */}
-                    <button
-                        type="submit"
-                        className="w-full bg-[#82e4c9] text-white font-semibold py-3 rounded-lg hover:bg-[#25b764] transition duration-300"
-                    >
-                        Sign in
-                    </button>
+                    <PrimaryButton label="Sign In" type="submit" />
 
                     {/* Signup Link */}
                     <div className="flex justify-center items-center pl-2 pr-2">
                         <p className="text-center text-sm text-gray-600 mr-auto">
                             Don’t have an account?{" "}
                         </p>
-                        <a href="#" className="relative text-[#82e4c9] no-underline hover:text-[#25b764] transition-colors duration-300 before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-[#25b764] before:transition-all before:duration-300 hover:before:w-full">
-                            Sign up
-                        </a>                        
+
+                        <div>
+                            <Link to="/signup" className="relative text-[#82e4c9] no-underline hover:text-[#25b764] transition-colors duration-300 before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-[#25b764] before:transition-all before:duration-300 hover:before:w-full">
+                                Sign up
+                            </Link>                        
+                        </div>                        
                     </div>
                 </form>                
             </div>            
