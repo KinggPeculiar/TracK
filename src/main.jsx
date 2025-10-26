@@ -4,10 +4,10 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
-import RootLayout from "./layouts/RootLayout";
-import PlainLayout from "./layouts/PlainLayout";
+import PublicLayout from "./layouts/PublicLayout";
+import AuthLayout from "./layouts/AuthLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 import ErrorPage from "./pages/ErrorPage";
-import ProtectedRoute from "./components/ProtectedRoute";
 import NotFoundPage from "./pages/NotFound";
 
 // lazy-load pages
@@ -17,34 +17,37 @@ const SignUp = lazy(() => import("./pages/SignUpForm"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"))
 
-const router =createBrowserRouter([
-  //Layout with Navbar and Footer
+const router = createBrowserRouter([
+  //Layout with PublicNavbar and Footer
   {
     path: "/",
-    element: <RootLayout />,
+    element: <PublicLayout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> }, // renders at "/"
-      { 
-        path: "dashboard",
-        element: (
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        ),
-      },
     ],
   },
 
-  // Layout without Navbar and Footer
-{
-  element: <PlainLayout />,
-  children: [
-    { path: "signin", element: <SignIn /> }, // "/signin"
-    { path: "signup", element: <SignUp /> }, // "/signup"    
-  ]
-},
-  { path: "*", element: <NotFound /> },
+  // Layout without PublicNavbar and Footer
+  {
+    element: <AuthLayout />,
+    children: [
+      { path: "signin", element: <SignIn /> }, // "/signin"
+      { path: "signup", element: <SignUp /> }, // "/signup"   
+    ]
+  },
+
+  // Layout with DashboardNavbar and Footer
+  { 
+    path: "dashboard",
+    element: <DashboardLayout />,
+    children: [
+      { path: "dashboard", element: <Dashboard /> },
+    ]
+  },  
+  { 
+    path: "*", element: <NotFound /> 
+  },
 ]);
 
 
