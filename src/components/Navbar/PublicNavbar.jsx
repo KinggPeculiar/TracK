@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "./common/Logo";
+import Logo from "../common/Logo";
 
 const linkClasses = "relative text-[#25b764] no-underline hover:text-[#28b969] transition-colors duration-300 before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-[#25b764] before:transition-all before:duration-300 hover:before:w-full";
 
