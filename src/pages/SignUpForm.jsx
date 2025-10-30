@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/common/Logo";
 import PrimaryButton from "../components/common/PrimaryButton";
 import PhoneNumberField from "../components/PhoneInput";
@@ -8,15 +8,34 @@ import useSignupForm from "../hooks/useSignupForm";
 export default function SignUp() {
     const [phone, setPhone] = useState("");
     const [isValidPhone, setIsValidPhone] = useState(false);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const {
+        formData,
+        touched,
+        errors,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+    } = useSignupForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    const onSubmit = (data) => {
         if (!isValidPhone) {
             alert("Please enter a valid phone number");
             return;
         }
-        console.log("Form submitted with phone:", phone);
+        const userData = { ...data, phone };
+        localStorage.setItem("track_user", JSON.stringify(userData));
+        alert("Account created successfully!");
+        navigate("/signin");
     };
+
 
     return (
         <div className="min-h-screen flex flex-col md:flex-row">
@@ -33,7 +52,7 @@ export default function SignUp() {
 
                     {/* Form */}
                     <form 
-                      onSubmit={handleSubmit}
+                      onSubmit={(e) => handleSubmit (e, onSubmit)}
                       className="max-w-4xl mx-auto p-6 bg-white rounded-2xl"
                     >
                         <div className="">
@@ -45,12 +64,12 @@ export default function SignUp() {
                                         First Name
                                     </label>
                                     <input
-                                    type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    placeholder="First Name"
-                                    className="form_input"
-                                    required
+                                      type="text"
+                                      id="firstName"
+                                      name="firstName"
+                                      placeholder="First Name"
+                                      className="form_input"
+                                      required
                                     />
                                 </div>
 
@@ -60,12 +79,12 @@ export default function SignUp() {
                                         Last Name
                                     </label>
                                     <input
-                                    type="text"
-                                    id="lastName"
-                                    name="lastName"
-                                    placeholder="Last Name"
-                                    className="form_input"
-                                    required
+                                      type="text"
+                                      id="lastName"
+                                     name="lastName"
+                                      placeholder="Last Name"
+                                      className="form_input"
+                                      required
                                     />
                                     {/* <p className="mt-1 text-sm text-red-500">Please enter the last name</p> */}
                                 </div>
@@ -76,20 +95,20 @@ export default function SignUp() {
                                         Email
                                     </label>
                                     <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    className="form_input"
+                                      type="email"
+                                      id="email"
+                                      name="email"
+                                      placeholder="Email"
+                                      className="form_input"
                                     />
                                 </div>
                                 
                                 {/* Phone Number Field */}
                                 <div className="flex flex-col">
                                     <PhoneNumberField
-                                    value={phone}
-                                    onChange={setPhone}
-                                    onValidChange={setIsValidPhone}
+                                      value={phone}
+                                      onChange={setPhone}
+                                      onValidChange={setIsValidPhone}
                                     />
                                 </div>
 
@@ -99,11 +118,11 @@ export default function SignUp() {
                                         Set Password
                                     </label>
                                     <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    placeholder="Enter Password"
-                                    className="form_input"
+                                      type="password"
+                                      id="password"
+                                      name="password"
+                                      placeholder="Enter Password"
+                                      className="form_input"
                                     />
                                 </div>
 
@@ -113,11 +132,11 @@ export default function SignUp() {
                                         Confirm Password
                                     </label>
                                     <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    placeholder="Enter Password"
-                                    className="form_input"
+                                      type="password"
+                                      id="password"
+                                      name="password"
+                                      placeholder="Enter Password"
+                                      className="form_input"
                                     />
                                 </div>                            
                             </div>                            
